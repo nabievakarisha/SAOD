@@ -1,0 +1,109 @@
+#include <iostream>
+#include <time.h>
+#include <locale>
+#define LeftChild( i )( 2 * ( i ) + 1 )
+//#define GT (a,b) (a > b)
+//#define LT (a,b) (a < b)
+
+using namespace std;
+
+int GT(int & a, int & b)
+{
+    return a > b;
+}
+int  LT(int & a, int & b)
+{
+    return a < b;
+}
+
+
+void SWAP(int & a, int & b)
+{
+    int tmp = a;
+    a = b;
+    b = tmp;
+}
+
+void Zapolnenie(int *a,int n){
+    for (int i = 0; i < n; i++){
+        a[i]=rand() % 11;
+
+
+
+}}
+void Print(int *a, int n){
+    for (int i =0 ; i < n; i++){
+             cout << a[i] <<" ";
+
+        }
+}
+void LINEARINSERTION(int a[], unsigned long n)
+{
+    unsigned long   i,j;
+   int           tmp;
+
+    for (i = 1; i < n; i++)     /* look for insertion point. */
+        for (j = i; j > 0 && GT(a[j - 1], a[j]); j--) {
+            /* Move the others down and insert it. */
+            tmp = a[j];
+            a[j] = a[j - 1];
+            a[j - 1] = tmp;
+        }
+}
+/*void PERCDOWN( int *a, int i, int N)
+{
+    int   Child;
+    int Tmp;
+
+    for (Tmp = a[i]; LeftChild(i) < N; i = Child) {
+        Child = LeftChild(i);
+        if (Child != N - 1 && GT(a[Child + 1], a[Child]))
+            Child++;
+        if (LT(Tmp, a[Child]))
+            a[i] = a[Child];
+        else
+            break;
+    }
+    a[i] = Tmp;
+}
+void HEAPSORT(int *a, int N)
+{
+    int i;
+
+    for (i = N / 2; i >= 0; i--)
+
+        PERCDOWN(a, i, N);
+    for (i = N - 1; i > 0; i--) {
+        SWAP(a[0], a[i]);
+
+        PERCDOWN(a, 0, i);
+    }}
+
+*/
+
+
+
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    int *a,n;
+    cout << "Vvedite razmer\n";
+    cin >> n;
+    a= new int[n];
+
+    Zapolnenie(a,n);
+    //Print(a,n);
+   // selection(a,n);
+    //cout <<"\nOtsortirov. massiv(selection) \n" ;
+   // Print(a,n);
+    //cout <<"\nmassiv b:\n";
+   // Print(b,n);
+   // HEAPSORT( a, n);
+     LINEARINSERTION( a, n);
+    Print(a,n);
+   // radix(b,c,d,k,n);
+   // cout <<"\nOtsortirov. massiv(radix)\n";
+   // Print(c,n);
+    return 0;
+}
