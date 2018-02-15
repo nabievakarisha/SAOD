@@ -1,6 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <locale>
+#include<fstream>
 #define LeftChild( i )( 2 * ( i ) + 1 )
 //#define GT (a,b) (a > b)
 //#define LT (a,b) (a < b)
@@ -24,10 +25,11 @@ void SWAP(int & a, int & b)
     b = tmp;
 }
 
-void Zapolnenie(int *a,int n){
+
+void Zapolnenie(int *a, int *b ,int n){
     for (int i = 0; i < n; i++){
         a[i]=rand() % 11;
-
+        b[i]= a[i];
 
 
 }}
@@ -42,15 +44,15 @@ void LINEARINSERTION(int a[], unsigned long n)
     unsigned long   i,j;
    int           tmp;
 
-    for (i = 1; i < n; i++)     /* look for insertion point. */
+    for (i = 1; i < n; i++)
         for (j = i; j > 0 && GT(a[j - 1], a[j]); j--) {
-            /* Move the others down and insert it. */
+
             tmp = a[j];
             a[j] = a[j - 1];
             a[j - 1] = tmp;
         }
 }
-/*void PERCDOWN( int *a, int i, int N)
+void PERCDOWN( int *a, int i, int N)
 {
     int   Child;
     int Tmp;
@@ -79,31 +81,73 @@ void HEAPSORT(int *a, int N)
         PERCDOWN(a, 0, i);
     }}
 
-*/
+
+void bubble(int *a, int n)
+{
+  register int i, j;
+  register char t;
+
+  for(i=1; i < n; i++)
+    for(j=n-1; j >= i; j--) {
+      if(a[j-1] > a[j]) {
+        t = a[j-1];
+        a[j-1] = a[j];
+        a[j] = t;
+      }
+    }
+}
 
 
+void radix(int *ar, int *br, int *cr, int sizeC, int sizeAB)
+{
 
-
+    int i,k,n;
+    k = sizeC;
+    n = sizeAB;
+    for (i = 0; i <= k; i++)
+        cr[i]=0;
+    for (i = 0; i < n; i++)
+        cr[ar[i]]+=1;
+    for (i = 1; i < k+1; i++)
+        cr[i]+=cr[i-1];
+    for (i = n-1; i >= 0; i--)
+      {
+         br[cr[ar[i]]-1]=ar[i];
+         cr[ar[i]]-=1;
+      }
+}
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    int *a,n;
+   /* int *a,n;
     cout << "Vvedite razmer\n";
     cin >> n;
     a= new int[n];
 
-    Zapolnenie(a,n);
-    //Print(a,n);
-   // selection(a,n);
-    //cout <<"\nOtsortirov. massiv(selection) \n" ;
-   // Print(a,n);
-    //cout <<"\nmassiv b:\n";
-   // Print(b,n);
-   // HEAPSORT( a, n);
-     LINEARINSERTION( a, n);
+    Zapolnenie(a,n);*/
+    int *a, *b, *c, *d, n, k = 11;
+       cout << "Vvedite razmer\n";
+       cin >> n;
+       a= new int[n];
+       b= new int[n];
+       c= new int[n];
+       d= new int[k];
+       Zapolnenie(a,b,n);
     Print(a,n);
-   // radix(b,c,d,k,n);
-   // cout <<"\nOtsortirov. massiv(radix)\n";
-   // Print(c,n);
+    HEAPSORT( a, n);
+    cout <<"\nOtsortirov. massiv(HEAPSORT)\n";
+    Print(a,n);
+    LINEARINSERTION( a, n);
+      cout <<"\nOtsortirov. massiv(LINEARINSERTION)\n";
+   Print(a,n);
+   bubble(a, n);
+      cout <<"\nOtsortirov. massiv(buble)\n";
+   Print(a,n);
+      radix(b,c,d,k,n);
+      cout <<"\nOtsortirov. massiv(radix)\n";
+     Print(c,n);
     return 0;
 }
+
+
+
